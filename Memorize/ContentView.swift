@@ -21,19 +21,22 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-  var isFaceUp: Bool = false
+  @State var isFaceUp: Bool = false
   
   var body: some View {
     ZStack {
+      // The view is still struct.
+      let base: RoundedRectangle = RoundedRectangle(cornerRadius: 20)
+      
       if isFaceUp{
-        RoundedRectangle(cornerRadius: 20)
-          .foregroundColor(.white)
-        RoundedRectangle(cornerRadius: 20)
-          .strokeBorder(lineWidth: 8)
+        base.foregroundColor(.white)
+        base.strokeBorder(lineWidth: 8)
         Text("🦋").font(.largeTitle)
       } else {
-        RoundedRectangle(cornerRadius: 10)
+        base
       }
+    }.onTapGesture {
+      isFaceUp.toggle()
     }
   }
 }
