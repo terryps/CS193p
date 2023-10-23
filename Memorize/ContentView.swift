@@ -8,17 +8,51 @@
 import SwiftUI
 
 struct ContentView: View {
-  let emojis: Array<String> = ["🦋", "🪺", "🪻", "🦉"]
+  let emojis: Array<String> = ["🦋", "🪺", "🏔️", "🦉", "🦊", "🐌", "🦎", "🍄"]
   
-    var body: some View {
-        HStack {
-          ForEach(emojis.indices, id: \.self) { i in
-            CardView(content: emojis[i], isFaceUp: true)
-          }
-        }
-        .foregroundColor(Color(hue: 0.442, saturation: 0.99, brightness: 0.985))
-        .padding(.all)
+  @State var colCount: Int = 4
+  
+  var body: some View {
+    VStack {
+      cards
+      // LazyVGrid uses as little spaces as it can.
+      // Space is needed between cards & adjusters.
+      Spacer()
+      cardCountAdjusters
     }
+    .padding()
+  }
+  
+  var cards: some View {
+    // LazyVGrid uses as little spaces as it can.
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+      ForEach(0..<colCount, id: \.self) { i in
+        CardView(content: emojis[i], isFaceUp: true)
+      }
+    }
+    .foregroundColor(Color(hue: 0.442, saturation: 0.99, brightness: 0.985))
+  }
+  
+  var cardCountAdjusters: some View {
+    HStack {
+      cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
+      Spacer()
+      cardCountAdjuster(by: 1, symbol: "rectangle.stack.badge.plus.fill")
+    }
+    .imageScale(.large)
+    .font(.largeTitle)
+  }
+  
+  func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
+    Button(action: {
+      colCount += offset
+    }, label: {
+      // The system image tries to track the fonts of the things near.
+      // The image scale is relative to the font size.
+      Image(systemName: symbol)
+    })
+    .disabled(colCount+offset < 1 || colCount+offset > emojis.count)
+  }
 }
 
 struct CardView: View {
