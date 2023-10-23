@@ -25,9 +25,10 @@ struct ContentView: View {
   
   var cards: some View {
     // LazyVGrid uses as little spaces as it can.
-    LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))]) {
       ForEach(0..<colCount, id: \.self) { i in
         CardView(content: emojis[i], isFaceUp: true)
+          .aspectRatio(3/4, contentMode: .fit)
       }
     }
     .foregroundColor(Color(hue: 0.442, saturation: 0.99, brightness: 0.985))
@@ -64,13 +65,12 @@ struct CardView: View {
       // The view is still struct.
       let base: RoundedRectangle = RoundedRectangle(cornerRadius: 20)
       
-      if isFaceUp{
-        base.foregroundColor(.white)
+      Group {
+        base.fill(.white)
         base.strokeBorder(lineWidth: 8)
         Text(content).font(.largeTitle)
-      } else {
-        base
       }
+      base.fill().opacity(isFaceUp ? 0 : 1)
     }.onTapGesture {
       isFaceUp.toggle()
     }
