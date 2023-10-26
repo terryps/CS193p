@@ -15,8 +15,8 @@ enum Theme: Int {
 
 struct ContentView: View {
   let emojis: [[String]] = [
-    ["🦋", "🪺", "🏔️", "🦉", "🦊", "🐌", "🦎"],
-    ["🪼", "🐠", "🐬", "🐡", "🪸", "🌊", "🫧", "🧜🏽"],
+    ["🦋", "🪺", "🏔️", "🦉", "🦊", "🐌", "🦎", "🐦‍⬛", "🍂", "🐝", "🫎", "🐿️", "🦡"],
+    ["🪼", "🐠", "🐬", "🐡", "🪸", "🐚", "🌊", "🫧", "🧜🏽"],
     ["🌝", "🪐", "🌙", "✨", "🌟", "🌏"]
   ]
   
@@ -32,43 +32,58 @@ struct ContentView: View {
       Spacer()
       cardThemeAdjusters
     }
-    .padding()
   }
   
   var cards: some View {
     var currEmojis: [String] = emojis[theme.rawValue]
     var emojiCount: Int = (currEmojis.count)*2
     var order: [Int] = Array(0..<emojiCount).shuffled()
+    let colWidth: CGFloat = bestFitsColWidth(cardCount: emojiCount)
 
     // LazyVGrid uses as little spaces as it can.
-    return LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))]) {
-      ForEach(order, id: \.self) { i in
-        CardView(content: currEmojis[i/2], isFaceUp: true)
-          .aspectRatio(3/4, contentMode: .fit)
+    return ScrollView{
+      LazyVGrid(columns: [GridItem(.adaptive(minimum: colWidth))]) {
+        ForEach(order, id: \.self) { i in
+          CardView(content: currEmojis[i/2], isFaceUp: true)
+            .aspectRatio(3/4, contentMode: .fit)
+        }
       }
-    }
-    .foregroundColor(Color(hue: 0.442, saturation: 0.99, brightness: 0.985))
+      .foregroundColor(Color(hue: 0.442, saturation: 0.99, brightness: 0.985))
+    }.padding()
   }
   
   var cardThemeAdjusters: some View {
     HStack(spacing: 20) {
-      cardThemeAdjuster(number: Theme.mysticWoods, symbol: "tree")
-      cardThemeAdjuster(number: Theme.underTheSea, symbol: "water.waves")
-      cardThemeAdjuster(number: Theme.starryNight, symbol: "moon.stars")
+      cardThemeAdjuster(number: Theme.mysticWoods, symbol: "tree", name: "Mystic\nwoods")
+      cardThemeAdjuster(number: Theme.underTheSea, symbol: "water.waves", name: "Under\nthe sea")
+      cardThemeAdjuster(number: Theme.starryNight, symbol: "moon.stars", name: "Starry\nnight")
     }
     .imageScale(.large)
-    .font(.largeTitle)
   }
   
-  func cardThemeAdjuster(number: Theme, symbol: String) -> some View {
+  func cardThemeAdjuster(number: Theme, symbol: String, name: String) -> some View {
     Button(action: {
       theme = number
     }, label: {
-      // The system image tries to track the fonts of the things near.
-      // The image scale is relative to the font size.
-      Image(systemName: symbol)
+      VStack{
+        // The system image tries to track the fonts of the things near.
+        // The image scale is relative to the font size.
+        Image(systemName: symbol)
+          .frame(height: 50)
+          .font(.title)
+        Text(name)
+      }
     })
     .disabled(theme==number)
+  }
+}
+
+func bestFitsColWidth(cardCount: Int) -> CGFloat {
+  switch cardCount {
+    case 8...20:
+      return 70
+    default:
+    return 50
   }
 }
 
@@ -83,8 +98,8 @@ struct CardView: View {
       
       Group {
         base.fill(.white)
-        base.strokeBorder(lineWidth: 8)
-        Text(content).font(.largeTitle)
+        base.strokeBorder(lineWidth: 4)
+        Text(content).font(.largeTitle).frame(maxHeight: .infinity)
       }
       base.fill().opacity(isFaceUp ? 0 : 1)
     }.onTapGesture {
