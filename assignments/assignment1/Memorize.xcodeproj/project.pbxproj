@@ -11,6 +11,7 @@
 		919C1B0E2AE8F50A00EF8F0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919C1B0D2AE8F50A00EF8F0F /* ContentView.swift */; };
 		919C1B102AE8F50B00EF8F0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 919C1B0F2AE8F50B00EF8F0F /* Assets.xcassets */; };
 		919C1B132AE8F50B00EF8F0F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 919C1B122AE8F50B00EF8F0F /* Preview Assets.xcassets */; };
+		91D66CC42AEA6EFF000844F7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91D66CC32AEA6EFF000844F7 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		919C1B0F2AE8F50B00EF8F0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		919C1B122AE8F50B00EF8F0F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		919C1B142AE8F50B00EF8F0F /* Memorize.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Memorize.entitlements; sourceTree = "<group>"; };
+		91D66CC32AEA6EFF000844F7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		919C1B0A2AE8F50A00EF8F0F /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				91D66CC32AEA6EFF000844F7 /* Launch Screen.storyboard */,
 				919C1B0B2AE8F50A00EF8F0F /* MemorizeApp.swift */,
 				919C1B0D2AE8F50A00EF8F0F /* ContentView.swift */,
 				919C1B0F2AE8F50B00EF8F0F /* Assets.xcassets */,
@@ -128,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				919C1B132AE8F50B00EF8F0F /* Preview Assets.xcassets in Resources */,
+				91D66CC42AEA6EFF000844F7 /* Launch Screen.storyboard in Resources */,
 				919C1B102AE8F50B00EF8F0F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +269,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Memorize/Memorize.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -273,6 +278,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -294,6 +300,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Memorize/Memorize.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -302,6 +309,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
