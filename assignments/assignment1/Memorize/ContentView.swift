@@ -83,7 +83,7 @@ func bestFitsColWidth(cardCount: Int) -> CGFloat {
     case 8...20:
       return 70
     default:
-    return 50
+    return 54
   }
 }
 
