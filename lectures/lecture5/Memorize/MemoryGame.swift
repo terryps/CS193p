@@ -23,9 +23,29 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
   }
   
+  var indexOfTheOneAndOnlyFaceUpCard: Int? {
+    get { cards.indices.filter { index in cards[index].isFaceUp }.only }
+    set {
+      // A closure that sets the binding value. The closure has the following parameter:
+      // • newValue: The new value of the binding value.
+      cards.indices.forEach { cards[$0].isFaceUp = (newValue == $0) }
+    }
+  }
+  
   mutating func choose(_ card: Card) {
     if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }) {
-      cards[chosenIndex].isFaceUp.toggle()
+      if !cards[chosenIndex].isFaceUp && !cards[chosenIndex].isMatched {
+        if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+          if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+            cards[chosenIndex].isMatched = true
+            cards[potentialMatchIndex].isMatched = true
+          }
+        } else {
+          indexOfTheOneAndOnlyFaceUpCard = chosenIndex
+        }
+        
+        cards[chosenIndex].isFaceUp = true
+      }
     }
   }
   
@@ -35,18 +55,20 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
   }
   
   struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
-    var isFaceUp = true
+    var isFaceUp = false
     var isMatched = false
     var content: CardContent
     
     var id: String
     
-    mutating func flip() {
-      isFaceUp = false
-    }
-    
     var debugDescription: String {
       return "\(id): \(content) \(isFaceUp ? "up" : "down") \(isMatched ? "matched" : "")"
     }
+  }
+}
+
+extension Array {
+  var only: Element? {
+    count == 1 ? first : nil
   }
 }
