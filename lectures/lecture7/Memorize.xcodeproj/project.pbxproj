@@ -14,6 +14,7 @@
 		91B319D82B19735B002CD62E /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B319D42B19735B002CD62E /* EmojiMemoryGameView.swift */; };
 		91B319D92B19735B002CD62E /* MemoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B319D52B19735B002CD62E /* MemoryApp.swift */; };
 		91B319DB2B1973C5002CD62E /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B319DA2B1973C5002CD62E /* AspectVGrid.swift */; };
+		91B319DD2B198F98002CD62E /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B319DC2B198F98002CD62E /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		91B319D42B19735B002CD62E /* EmojiMemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameView.swift; sourceTree = "<group>"; };
 		91B319D52B19735B002CD62E /* MemoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryApp.swift; sourceTree = "<group>"; };
 		91B319DA2B1973C5002CD62E /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
+		91B319DC2B198F98002CD62E /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				91B319DA2B1973C5002CD62E /* AspectVGrid.swift */,
+				91B319DC2B198F98002CD62E /* CardView.swift */,
 				91B319D22B19735B002CD62E /* EmojiMemoryGame.swift */,
 				91B319D42B19735B002CD62E /* EmojiMemoryGameView.swift */,
 				91B319D52B19735B002CD62E /* MemoryApp.swift */,
@@ -150,6 +153,7 @@
 				91B319D62B19735B002CD62E /* EmojiMemoryGame.swift in Sources */,
 				91B319D72B19735B002CD62E /* MemoryGame.swift in Sources */,
 				91B319D82B19735B002CD62E /* EmojiMemoryGameView.swift in Sources */,
+				91B319DD2B198F98002CD62E /* CardView.swift in Sources */,
 				91B319D92B19735B002CD62E /* MemoryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
