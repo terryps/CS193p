@@ -15,22 +15,36 @@ struct CardView: View {
   init(_ card: MemoryGame<String>.Card) {
     self.card = card
   }
-  
+    
   var body: some View {
     ZStack {
       // The view is still struct.
-      let base: RoundedRectangle = RoundedRectangle(cornerRadius: 20)
+      let base: RoundedRectangle = RoundedRectangle(cornerRadius: Constants.conrnerRadius)
       
       Group {
         base.fill(.white)
-        base.strokeBorder(lineWidth: 4)
+        base.strokeBorder(lineWidth: Constants.lineWidth)
         Text(card.content)
-          .font(.system(size: 200))
-          .minimumScaleFactor(0.01)
+          .font(.system(size: Constants.FontSize.largest))
+          .minimumScaleFactor(Constants.FontSize.scaleFactor)
+          .multilineTextAlignment(.center)
           .aspectRatio(1, contentMode: .fit)
+          .padding(Constants.inset)
       }
-      // .opacity(card.isFaceUp ? 1 : 0)
+//       .opacity(card.isFaceUp ? 1 : 0)
       base.fill().opacity(card.isFaceUp || card.isMatched ? 0 : 1)
+    }
+  }
+  
+  // Namespaced all the constants used in CardView into "Constants" struct.
+  private struct Constants {
+    static let conrnerRadius: CGFloat = 16
+    static let lineWidth: CGFloat = 4
+    static let inset: CGFloat = 5
+    struct FontSize {
+      static let largest: CGFloat = 200
+      static let smallest: CGFloat = 10
+      static let scaleFactor = smallest / largest
     }
   }
 }
@@ -41,6 +55,15 @@ struct CardView_Previews: PreviewProvider {
   typealias Card = CardView.Card
   
   static var previews: some View {
-    CardView(Card(content: "X", id: "test1"))
+    VStack{
+      HStack{
+        CardView(Card(content: "X", id: "test1"))
+        CardView(Card(isFaceUp: true, content: "X", id: "test2"))
+      }
+      HStack{
+        CardView(Card(isMatched: true, content: "This is a very long string and I hope it fits.", id: "test1"))
+        CardView(Card(isFaceUp: true, content: "X", id: "test2"))
+      }
+    }
   }
 }

@@ -15,6 +15,7 @@ struct EmojiMemoryGameView: View {
   var body: some View {
     VStack {
       cards
+        .foregroundColor(gameViewModel.color)
         .animation(.default, value: gameViewModel.cards)
 
       Button("Shuffle") {
@@ -33,7 +34,6 @@ struct EmojiMemoryGameView: View {
           gameViewModel.choose(card)
       }
     }
-    .foregroundColor(Color(hue: 0.442, saturation: 0.99, brightness: 0.985))
   }
 }
 
