@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CardView: View {
+  typealias Card = MemoryGame<String>.Card
+  
   let card: MemoryGame<String>.Card
   
   init(_ card: MemoryGame<String>.Card) {
@@ -34,7 +36,11 @@ struct CardView: View {
 }
 
 struct CardView_Previews: PreviewProvider {
+  // This is the preview for the CardView.
+  // So, it makes sense to alias that to be CardView.Card.
+  typealias Card = CardView.Card
+  
   static var previews: some View {
-    CardView(MemoryGame<String>.Card(content: "X", id: "test1"))
+    CardView(Card(content: "X", id: "test1"))
   }
 }
