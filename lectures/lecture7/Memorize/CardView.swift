@@ -17,28 +17,18 @@ struct CardView: View {
   }
     
   var body: some View {
-    ZStack {
-      // The view is still struct.
-      let base: RoundedRectangle = RoundedRectangle(cornerRadius: Constants.conrnerRadius)
-      
-      Group {
-        base.fill(.white)
-        base.strokeBorder(lineWidth: Constants.lineWidth)
-        Pie(endAngle: .degrees(360))
-          .opacity(Constants.Pie.opacity)
-          .overlay{
-            Text(card.content)
-              .font(.system(size: Constants.FontSize.largest))
-              .minimumScaleFactor(Constants.FontSize.scaleFactor)
-              .multilineTextAlignment(.center)
-              .aspectRatio(1, contentMode: .fit)
-              .padding(Constants.Pie.inset)
-          }
-          .padding(Constants.inset)
+    Pie(endAngle: .degrees(360))
+      .opacity(Constants.Pie.opacity)
+      .overlay{
+        Text(card.content)
+          .font(.system(size: Constants.FontSize.largest))
+          .minimumScaleFactor(Constants.FontSize.scaleFactor)
+          .multilineTextAlignment(.center)
+          .aspectRatio(1, contentMode: .fit)
+          .padding(Constants.Pie.inset)
       }
-//       .opacity(card.isFaceUp ? 1 : 0)
-      base.fill().opacity(card.isFaceUp || card.isMatched ? 0 : 1)
-    }
+      .padding(Constants.inset)
+      .cardify(isFaceUp: card.isFaceUp, isMatched: card.isMatched)
   }
   
   // Namespaced all the constants used in CardView into "Constants" struct.
