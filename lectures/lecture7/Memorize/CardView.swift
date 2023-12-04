@@ -24,8 +24,8 @@ struct CardView: View {
       Group {
         base.fill(.white)
         base.strokeBorder(lineWidth: Constants.lineWidth)
-        Circle()
-          .opacity(0.4)
+        Pie(endAngle: .degrees(360))
+          .opacity(Constants.Pie.opacity)
           .overlay{
             Text(card.content)
               .font(.system(size: Constants.FontSize.largest))
