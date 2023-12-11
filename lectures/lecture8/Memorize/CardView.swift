@@ -31,7 +31,7 @@ struct CardView: View {
           .animation(.spin(duration: 1), value: card.isMatched)
       }
       .padding(Constants.inset)
-      .cardify(isFaceUp: card.isFaceUp, isMatched: card.isMatched)
+      .cardify(isFaceUp: card.isFaceUp)
   }
   
   // Namespaced all the constants used in CardView into "Constants" struct.
