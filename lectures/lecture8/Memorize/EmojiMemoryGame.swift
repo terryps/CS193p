@@ -34,6 +34,10 @@ class EmojiMemoryGame: ObservableObject {
     Color(hue: 0.442, saturation: 0.99, brightness: 0.985)
   }
   
+  var score: Int {
+    gameModel.score
+  }
+  
   // MARK: - Intents
   
   func shuffle() {

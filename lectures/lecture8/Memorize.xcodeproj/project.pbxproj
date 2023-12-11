@@ -17,6 +17,7 @@
 		91B31A092B26A38D002CD62E /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B31A012B26A38D002CD62E /* EmojiMemoryGame.swift */; };
 		91B31A0A2B26A38D002CD62E /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B31A022B26A38D002CD62E /* EmojiMemoryGameView.swift */; };
 		91B31A0B2B26A38D002CD62E /* MemoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B31A032B26A38D002CD62E /* MemoryApp.swift */; };
+		91B31A0D2B26ED0A002CD62E /* FlyingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B31A0C2B26ED0A002CD62E /* FlyingNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		91B31A012B26A38D002CD62E /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		91B31A022B26A38D002CD62E /* EmojiMemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameView.swift; sourceTree = "<group>"; };
 		91B31A032B26A38D002CD62E /* MemoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryApp.swift; sourceTree = "<group>"; };
+		91B31A0C2B26ED0A002CD62E /* FlyingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingNumber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				91B319FC2B26A38D002CD62E /* Pie.swift */,
 				91B319F22B26A326002CD62E /* Assets.xcassets */,
 				91B319F42B26A326002CD62E /* Preview Content */,
+				91B31A0C2B26ED0A002CD62E /* FlyingNumber.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			files = (
 				91B31A042B26A38D002CD62E /* Pie.swift in Sources */,
 				91B31A052B26A38D002CD62E /* MemoryGame.swift in Sources */,
+				91B31A0D2B26ED0A002CD62E /* FlyingNumber.swift in Sources */,
 				91B31A062B26A38D002CD62E /* Cardify.swift in Sources */,
 				91B31A072B26A38D002CD62E /* AspectVGrid.swift in Sources */,
 				91B31A082B26A38D002CD62E /* CardView.swift in Sources */,
