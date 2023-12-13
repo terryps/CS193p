@@ -49,14 +49,33 @@ struct EmojiMemoryGameView: View {
         .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
         .onTapGesture {
           withAnimation {
+            let scoreBeforeChoosing = gameViewModel.score
             gameViewModel.choose(card)
+            let scoreAfterChoosing = gameViewModel.score - scoreBeforeChoosing
+            lastScoreChange = (scoreAfterChoosing, card.id)
           }
       }
     }
   }
   
+  // Card.ID: the Identifiable for the Card
+  // @State private var lastScoreChange: (amount: Int, causedByCardId: Card.ID) = (amount: 0, causedByCardId: "")
+  
+  // We can omit type because we use Swift type inference.
+  // @State private var lastScoreChange = (amount: 0, causedByCardId: "")
+  
+  // Tuples don't need names.
+  @State private var lastScoreChange = (0, causedByCardId: "")
+  
   private func scoreChange(causedBy card: Card) -> Int {
-    return 0
+    // Getting the values out of a tuple, say let and variable names.
+    let (amount, causedByCardId: id) = lastScoreChange
+    
+    return card.id == id ? amount : 0
+    
+    // Another way to access tuple stuff (not recommended)
+    // This is pretty obscure to understand the syntax.
+    // return lastScoreChange.1 == card.id ? lastScoreChange.0 : 0
   }
 }
 
