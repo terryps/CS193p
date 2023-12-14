@@ -20,20 +20,21 @@ struct CardView: View {
     TimelineView(.animation(minimumInterval: 1/10)) { timeline in
       Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
         .opacity(Constants.Pie.opacity)
-        .overlay{
-          // want to do a flip when cards are matched
-          Text(card.content)
-            .font(.system(size: Constants.FontSize.largest))
-            .minimumScaleFactor(Constants.FontSize.scaleFactor)
-            .multilineTextAlignment(.center)
-            .aspectRatio(1, contentMode: .fit)
-            .padding(Constants.Pie.inset)
-            .rotationEffect(.degrees(card.isMatched ? 360 : 0))
-            .animation(.spin(duration: 1), value: card.isMatched)
-        }
+        .overlay{cardContents}
         .padding(Constants.inset)
         .cardify(isFaceUp: card.isFaceUp)
     }
+  }
+  
+  var cardContents: some View {
+    Text(card.content)
+      .font(.system(size: Constants.FontSize.largest))
+      .minimumScaleFactor(Constants.FontSize.scaleFactor)
+      .multilineTextAlignment(.center)
+      .aspectRatio(1, contentMode: .fit)
+      .padding(Constants.Pie.inset)
+      .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+      .animation(.spin(duration: 1), value: card.isMatched)
   }
   
   // Namespaced all the constants used in CardView into "Constants" struct.
