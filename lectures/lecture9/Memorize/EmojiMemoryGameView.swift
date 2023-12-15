@@ -12,6 +12,7 @@ struct EmojiMemoryGameView: View {
   @ObservedObject var gameViewModel: EmojiMemoryGame
   
   private let aspectRatio: CGFloat = 2/3
+  private let spacing: CGFloat = 4
   
   var body: some View {
     VStack {
@@ -43,15 +44,38 @@ struct EmojiMemoryGameView: View {
   
   private var cards: some View {
     AspectVGrid(gameViewModel.cards, aspectRatio: aspectRatio) { card in
-      // Pass this view to AspectVGrid throung content argument.
-      return CardView(card)
-        .padding(4)
-        .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
-        .zIndex(scoreChange(causedBy: card) != 0 ? 100 : 0)
-        .onTapGesture {
-          choose(card)
-        }
+      if isDealt(card) {
+        CardView(card)
+          .padding(spacing)
+          .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
+          .zIndex(scoreChange(causedBy: card) != 0 ? 100 : 0)
+          .onTapGesture {
+            choose(card)
+          }
+          .transition(.offset(
+            x: 2000,
+            y: -1000
+          ))
+      }
     }
+    .onAppear {
+      // deal the cards
+      withAnimation(.easeInOut(duration: 2)) {
+        for card in gameViewModel.cards {
+          dealt.insert(card.id)
+        }
+      }
+    }
+  }
+  
+  @State private var dealt = Set<Card.ID>()
+  
+  private func isDealt(_ card: Card) -> Bool {
+    dealt.contains(card.id)
+  }
+  
+  private var undealtCards: [Card] {
+    gameViewModel.cards.filter { !isDealt($0) }
   }
   
   private func choose(_ card: Card) {
