@@ -22,6 +22,8 @@ struct EmojiMemoryGameView: View {
       HStack {
         score
         Spacer()
+        deck
+        Spacer()
         shuffle
       }
     }
@@ -46,24 +48,13 @@ struct EmojiMemoryGameView: View {
     AspectVGrid(gameViewModel.cards, aspectRatio: aspectRatio) { card in
       if isDealt(card) {
         CardView(card)
+          .matchedGeometryEffect(id: card.id, in: dealingNamespace)
           .padding(spacing)
           .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
           .zIndex(scoreChange(causedBy: card) != 0 ? 100 : 0)
           .onTapGesture {
             choose(card)
           }
-          .transition(.offset(
-            x: 2000,
-            y: -1000
-          ))
-      }
-    }
-    .onAppear {
-      // deal the cards
-      withAnimation(.easeInOut(duration: 2)) {
-        for card in gameViewModel.cards {
-          dealt.insert(card.id)
-        }
       }
     }
   }
@@ -77,6 +68,28 @@ struct EmojiMemoryGameView: View {
   private var undealtCards: [Card] {
     gameViewModel.cards.filter { !isDealt($0) }
   }
+  
+  @Namespace private var dealingNamespace
+  
+  private var deck: some View {
+    ZStack {
+      ForEach(undealtCards) { card in
+        CardView(card)
+          .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+      }
+    }
+    .frame(width: deckWidth, height: deckWidth / aspectRatio)
+    .onAppear {
+      // deal the cards
+      withAnimation(.easeInOut(duration: 2)) {
+        for card in gameViewModel.cards {
+          dealt.insert(card.id)
+        }
+      }
+    }
+  }
+  
+  private let deckWidth: CGFloat = 50
   
   private func choose(_ card: Card) {
     withAnimation {
