@@ -18,11 +18,16 @@ struct CardView: View {
     
   var body: some View {
     TimelineView(.animation(minimumInterval: 1/10)) { timeline in
-      Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
-        .opacity(Constants.Pie.opacity)
-        .overlay(cardContents.padding(Constants.Pie.inset))
-        .padding(Constants.inset)
-        .cardify(isFaceUp: card.isFaceUp)
+      if card.isFaceUp || !card.isMatched {
+        Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
+          .opacity(Constants.Pie.opacity)
+          .overlay(cardContents.padding(Constants.Pie.inset))
+          .padding(Constants.inset)
+          .cardify(isFaceUp: card.isFaceUp)
+          .transition(.scale)
+      } else {
+        Color.clear
+      }
     }
   }
   
