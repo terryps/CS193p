@@ -13,6 +13,9 @@ struct EmojiMemoryGameView: View {
   
   private let aspectRatio: CGFloat = 2/3
   private let spacing: CGFloat = 4
+  private let dealAnimation: Animation = .easeInOut(duration: 1)
+  private let dealInterval: TimeInterval = 0.15
+  private let deckWidth: CGFloat = 50
   
   var body: some View {
     VStack {
@@ -81,18 +84,22 @@ struct EmojiMemoryGameView: View {
       }
     }
     .frame(width: deckWidth, height: deckWidth / aspectRatio)
-    .onAppear {
-      // deal the cards
-      withAnimation(.easeInOut(duration: 2)) {
-        for card in gameViewModel.cards {
-          dealt.insert(card.id)
-        }
-      }
+    .onTapGesture {
+      deal()
     }
   }
   
-  private let deckWidth: CGFloat = 50
-  
+  private func deal() {
+    // deal the cards
+    var delay: TimeInterval = 0
+    for card in gameViewModel.cards {
+      withAnimation(dealAnimation.delay(delay)) {
+        _ = dealt.insert(card.id)
+      }
+      delay += dealInterval
+    }
+  }
+
   private func choose(_ card: Card) {
     withAnimation {
       let scoreBeforeChoosing = gameViewModel.score
