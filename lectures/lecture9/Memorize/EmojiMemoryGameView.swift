@@ -22,7 +22,7 @@ struct EmojiMemoryGameView: View {
       HStack {
         score
         Spacer()
-        deck
+        deck.foregroundColor(gameViewModel.color)
         Spacer()
         shuffle
       }
@@ -49,6 +49,7 @@ struct EmojiMemoryGameView: View {
       if isDealt(card) {
         CardView(card)
           .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+          .transition(.asymmetric(insertion: .identity, removal: .identity))
           .padding(spacing)
           .overlay(FlyingNumber(number: scoreChange(causedBy: card)))
           .zIndex(scoreChange(causedBy: card) != 0 ? 100 : 0)
@@ -76,6 +77,7 @@ struct EmojiMemoryGameView: View {
       ForEach(undealtCards) { card in
         CardView(card)
           .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+          .transition(.asymmetric(insertion: .identity, removal: .identity))
       }
     }
     .frame(width: deckWidth, height: deckWidth / aspectRatio)
