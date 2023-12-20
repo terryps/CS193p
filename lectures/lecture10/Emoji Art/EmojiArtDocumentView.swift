@@ -10,12 +10,17 @@ import SwiftUI
 struct EmojiArtDocumentView: View {
   private let emojis = "👣🧶🧵🪡🥿👞👢🧦🧤🧣💼🧳👓🥽🦉🦇🦋🐌🐞🐜🕷️🕸️🐍🦎🫏🐎🐏🐑🦙🐐🦌🐕🐈🐈‍⬛🪶🐓🪿🦆🐦‍⬛🦢🕊️🐇🦝🦡🦫🦦🐀🐿️🐾🌲🌳🌴🪵🌵🌱🌿☘️🍀🎍🪴🍃🍂🍁🪺🪹🍄🪨🌹🪻🪷🌺🌻🌞🌝🌔🪐☁️🔥🌈🌨️🍊🍋🍎🍇🍒🍑🥥🎂🍮🍯🥛🫖☕️🍵🥤🧃🍺🍷🥃🍸🍹🧉🍴🍽️🥡🥣"
   
-    var body: some View {
-      VStack {
-        Color.black
-        ScrollingEmojis(emojis)
-      }
+  private let paletteEmojiSize: CGFloat = 40
+  
+  var body: some View {
+    VStack(spacing: 0) {
+      Color.black
+      ScrollingEmojis(emojis)
+        .font(.system(size: paletteEmojiSize))
+        .padding(.horizontal)
+        .scrollIndicators(.hidden)
     }
+  }
 }
 
 struct ScrollingEmojis: View {
