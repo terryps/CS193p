@@ -7,7 +7,7 @@
 
 // MVVM - view model
 
-import Foundation
+import SwiftUI
 
 class EmojiArtDocument: ObservableObject {
   typealias Emoji = EmojiArt.Emoji
@@ -30,5 +30,12 @@ class EmojiArtDocument: ObservableObject {
   
   func addEmoji(_ emoji: String, at position: Emoji.Position, size: CGFloat) {
     emojiArt.addEmoji(emoji, at: position, size: Int(size))
+  }
+}
+
+
+extension EmojiArt.Emoji {
+  var font: Font {
+    Font.system(size: CGFloat(size))
   }
 }
