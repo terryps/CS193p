@@ -39,3 +39,14 @@ extension EmojiArt.Emoji {
     Font.system(size: CGFloat(size))
   }
 }
+
+extension EmojiArt.Emoji.Position {
+  // Error: Keyword 'in' cannot be used as an identifier here
+  // Fix: back quotes around 'in'
+  func `in`(_ geometry: GeometryProxy) -> CGPoint {
+    // local coordinate system of our View
+    // center is an extension of CGRect
+    let center = geometry.frame(in: .local).center
+    return CGPoint(x: center.x + CGFloat(x), y: center.y - CGFloat(y))
+  }
+}
