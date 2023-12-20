@@ -8,18 +8,31 @@
 import SwiftUI
 
 struct EmojiArtDocumentView: View {
-  private let emojis = ""
+  private let emojis = "👣🧶🧵🪡🥿👞👢🧦🧤🧣💼🧳👓🥽🦉🦇🦋🐌🐞🐜🕷️🕸️🐍🦎🫏🐎🐏🐑🦙🐐🦌🐕🐈🐈‍⬛🪶🐓🪿🦆🐦‍⬛🦢🕊️🐇🦝🦡🦫🦦🐀🐿️🐾🌲🌳🌴🪵🌵🌱🌿☘️🍀🎍🪴🍃🍂🍁🪺🪹🍄🪨🌹🪻🪷🌺🌻🌞🌝🌔🪐☁️🔥🌈🌨️🍊🍋🍎🍇🍒🍑🥥🎂🍮🍯🥛🫖☕️🍵🥤🧃🍺🍷🥃🍸🍹🧉🍴🍽️🥡🥣"
+  
     var body: some View {
       VStack {
         Color.black
-        ScrollingEmojis()
+        ScrollingEmojis(emojis)
       }
     }
 }
 
 struct ScrollingEmojis: View {
-  var body: some View {    
+  let emojis: [String]
+  
+  init(_ emojis: String) {
+    // uniqued(extension): takes a string and removes all duplicates.
+    self.emojis = emojis.uniqued.map(String.init)
+  }
+  
+  var body: some View {
     ScrollView(.horizontal) {
+      HStack {
+        ForEach(emojis, id: \.self) { emoji in
+          Text(emoji)
+        }
+      }
     }
   }
 }
