@@ -13,11 +13,11 @@ class EmojiArtDocument: ObservableObject {
   typealias Emoji = EmojiArt.Emoji
   
   // Protect model from external access.
-  private var emojiArt = EmojiArt()
+  @Published private var emojiArt = EmojiArt()
   
   init() {
-    emojiArt.addEmoji("🌲", at: .init(x: -200, y: -150), size: 200)
-    emojiArt.addEmoji("🍇", at: .init(x: 250, y: -100), size: 80)
+    emojiArt.addEmoji("🌲", at: .init(x: -200, y: 200), size: 200)
+    emojiArt.addEmoji("🦢", at: .init(x: 250, y: -150), size: 80)
   }
   
   var emojis: [Emoji] {
