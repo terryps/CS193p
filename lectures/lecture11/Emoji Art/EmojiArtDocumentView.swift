@@ -32,7 +32,7 @@ struct EmojiArtDocumentView: View {
         Color.white
         documentContents(in: geometry)
           .scaleEffect(zoom * gestureZoom)
-          .offset(pan)
+          .offset(pan + gesturePan)
       }
       // add .gesture modifier to recognize gestures
       // .simultaneously tells the system that I want both of these gestures
@@ -53,6 +53,7 @@ struct EmojiArtDocumentView: View {
   // Why? By the way, why is our zoom in @State, instead of being in our model or something?
   // Because zooming and panning in on the document is not part of an emoji document. It's how we're viewing it.
   @GestureState private var gestureZoom: CGFloat = 1
+  @GestureState private var gesturePan: CGOffset = .zero
   
   private var zoomGesture: some Gesture {
     // By pinching the documentContents, it got twice as big or half as big or whatever.
@@ -70,6 +71,13 @@ struct EmojiArtDocumentView: View {
   private var panGesture: some Gesture {
     // Dragging means finger across the screen.
     DragGesture()
+      .updating($gesturePan) { value, gesturePan, _ in
+        gesturePan = value.translation
+      }
+      .onEnded { value in
+        // pan: CGOffset has extension for +=.
+        pan += value.translation
+      }
   }
   
   @ViewBuilder
