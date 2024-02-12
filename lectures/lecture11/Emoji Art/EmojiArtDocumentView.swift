@@ -31,7 +31,7 @@ struct EmojiArtDocumentView: View {
       ZStack {
         Color.white
         documentContents(in: geometry)
-          .scaleEffect(zoom)
+          .scaleEffect(zoom * gestureZoom)
           .offset(pan)
       }
       // add .gesture modifier to recognize gestures
@@ -43,13 +43,22 @@ struct EmojiArtDocumentView: View {
   }
   
   // zoom and pan around on documentContents
-  @State private var zoom: CGFloat = 0.5
+  @State private var zoom: CGFloat = 1
   @State private var pan: CGOffset = .zero
+  
+  // Prob: Cannot see anything while dragging. After I let go dragging, it works.
+  // I want to zoom while pinching.
+  // Why? By the way, why is our zoom in @State, instead of being in our model or something?
+  // Because zooming and panning in on the document is not part of an emoji document. It's how we're viewing it.
+  @GestureState private var gestureZoom: CGFloat = 1
   
   private var zoomGesture: some Gesture {
     // By pinching the documentContents, it got twice as big or half as big or whatever.
     // It's going to change zoom by that much.
     MagnificationGesture()
+      .updating($gestureZoom) { inMotionPinchScale, gestureZoom, _ in
+        gestureZoom = inMotionPinchScale
+      }
       .onEnded { endingPinchScale in
         // endingPinchScale(value): CGFloat
         zoom *= endingPinchScale
