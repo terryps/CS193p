@@ -30,17 +30,40 @@ struct EmojiArtDocumentView: View {
     GeometryReader { geometry in
       ZStack {
         Color.white
-        AsyncImage(url: document.background)
-          .position(Emoji.Position(x: 0, y:0).in(geometry))
-        ForEach(document.emojis) { emoji in
-          Text(emoji.string)
-            .font(emoji.font)
-            .position(emoji.position.in(geometry))
-        }
+        documentContents(in: geometry)
+          .scaleEffect(zoom)
+          .offset(pan)
       }
+      // add .gesture modifier to recognize gestures
+      .gesture(zoomGesture)
       .dropDestination(for: Sturldata.self) { sturldatas, location in
         return drop(sturldatas, at: location, in: geometry)
       }
+    }
+  }
+  
+  // zoom and pan around on documentContents
+  @State private var zoom: CGFloat = 0.5
+  @State private var pan: CGOffset = .zero
+  
+  private var zoomGesture: some Gesture {
+    // By pinching the documentContents, it got twice as big or half as big or whatever.
+    // It's going to change zoom by that much.
+    MagnificationGesture()
+      .onEnded { endingPinchScale in
+        // endingPinchScale(value): CGFloat
+        zoom *= endingPinchScale
+      }
+  }
+  
+  @ViewBuilder
+  private func documentContents(in geometry: GeometryProxy) -> some View {
+    AsyncImage(url: document.background)
+      .position(Emoji.Position(x: 0, y:0).in(geometry))
+    ForEach(document.emojis) { emoji in
+      Text(emoji.string)
+        .font(emoji.font)
+        .position(emoji.position.in(geometry))
     }
   }
   
