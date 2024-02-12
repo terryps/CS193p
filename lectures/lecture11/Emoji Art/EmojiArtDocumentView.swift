@@ -35,7 +35,9 @@ struct EmojiArtDocumentView: View {
           .offset(pan)
       }
       // add .gesture modifier to recognize gestures
-      .gesture(zoomGesture)
+      // .simultaneously tells the system that I want both of these gestures
+      // to be recognized at the same time.
+      .gesture(panGesture.simultaneously(with: zoomGesture))
       .dropDestination(for: Sturldata.self) { sturldatas, location in
         return drop(sturldatas, at: location, in: geometry)
       }
@@ -63,6 +65,11 @@ struct EmojiArtDocumentView: View {
         // endingPinchScale(value): CGFloat
         zoom *= endingPinchScale
       }
+  }
+  
+  private var panGesture: some Gesture {
+    // Dragging means finger across the screen.
+    DragGesture()
   }
   
   @ViewBuilder
