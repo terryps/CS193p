@@ -35,6 +35,7 @@
 		91B7D5E62B7B5551007BE689 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		91B7D5E82B7B5A26007BE689 /* PaletteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteStore.swift; sourceTree = "<group>"; };
 		91B7D5EA2B7B663B007BE689 /* PaletteChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteChooser.swift; sourceTree = "<group>"; };
+		91B7D5EC2B7B7156007BE689 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 				91B7D5D02B7A1816007BE689 /* ContentView.swift */,
 				91B7D5D22B7A1819007BE689 /* Assets.xcassets */,
 				91B7D5D42B7A1819007BE689 /* Preview Content */,
+				91B7D5EC2B7B7156007BE689 /* README.md */,
 			);
 			path = "Emoji Art";
 			sourceTree = "<group>";
