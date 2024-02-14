@@ -10,7 +10,7 @@
 import Foundation
 
 struct EmojiArt: Codable {
-  var background: URL? = nil
+  var background: URL?
   private(set) var emojis = [Emoji]()
   
   func json() throws -> Data {
@@ -18,6 +18,17 @@ struct EmojiArt: Codable {
     print("EmojiArt = \(String(data: encoded, encoding: .utf8) ?? "nil")")
     return encoded
   }
+  
+  init(json: Data) throws {
+    self = try JSONDecoder().decode(EmojiArt.self, from: json)
+  }
+  
+  // Error on EmojiArtDocument: Missing argument for parameter 'json' in call
+  // Before adding an init(json: ), initializing background was optional. There was nothing to initialize.
+  // So, init with no arguments worked.
+  // But, now that there is an init(json: ), I lost the free one.
+  // So, if we want that init with no arguments, we have to put it here.
+  init() {}
   
   private var uniqueEmojiId = 0
   
