@@ -13,7 +13,23 @@ class EmojiArtDocument: ObservableObject {
   typealias Emoji = EmojiArt.Emoji
   
   // Protect model from external access.
-  @Published private var emojiArt = EmojiArt()
+  @Published private var emojiArt = EmojiArt() {
+    didSet {
+      autosave()
+    }
+  }
+  
+  private let autosaveURL: URL = URL.documentsDirectory.appendingPathComponent("Autosaved.emojiart")
+  
+  private func autosave() {
+    save(to: autosaveURL)
+    print("autosaved to \(autosaveURL)")
+  }
+  
+  private func save(to url: URL) {
+    let data = emojiArt.json()
+    data.write(to: url)
+  }
   
   init() {
     emojiArt.addEmoji("🌲", at: .init(x: -200, y: 200), size: 200)
