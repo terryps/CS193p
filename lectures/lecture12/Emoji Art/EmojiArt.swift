@@ -9,9 +9,13 @@
 
 import Foundation
 
-struct EmojiArt {
+struct EmojiArt: Codable {
   var background: URL? = nil
   private(set) var emojis = [Emoji]()
+  
+  func json() -> Data {
+    return JSONEncoder().encode(self)
+  }
   
   private var uniqueEmojiId = 0
   
@@ -25,7 +29,7 @@ struct EmojiArt {
     ))
   }
 
-  struct Emoji: Identifiable {
+  struct Emoji: Identifiable, Codable {
     // Emoji has to stay. Once its content decided, it doesn't change to something else.
     // So use let.
     let string: String
@@ -33,7 +37,7 @@ struct EmojiArt {
     var size: Int
     var id: Int
     
-    struct Position {
+    struct Position: Codable {
       var x: Int
       var y: Int
       
