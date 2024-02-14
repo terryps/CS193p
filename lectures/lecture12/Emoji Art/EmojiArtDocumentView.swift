@@ -80,7 +80,17 @@ struct EmojiArtDocumentView: View {
   
   @ViewBuilder
   private func documentContents(in geometry: GeometryProxy) -> some View {
-    AsyncImage(url: document.background)
+    AsyncImage(url: document.background) { phase in
+      if let image = phase.image {
+        image
+      } else if let url = document.background {
+        if phase.error != nil {
+          Text("\(url)")
+        } else {
+          ProgressView()
+        }
+      }
+    }
       .position(Emoji.Position(x: 0, y:0).in(geometry))
     ForEach(document.emojis) { emoji in
       Text(emoji.string)
