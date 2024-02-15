@@ -7,21 +7,47 @@
 
 import SwiftUI
 
+extension UserDefaults {
+  func palettes(forKey key: String) -> [Palette] {
+    if let jsonData = data(forKey: key),
+       let decodedPalettes = try? JSONDecoder().decode([Palette].self, from: jsonData) {
+      return decodedPalettes
+    } else {
+      return []
+    }
+  }
+  func set(_ palettes: [Palette], forKey key: String) {
+    let data = try? JSONEncoder().encode(palettes)
+    set(data, forKey: key)
+  }
+}
+
 class PaletteStore: ObservableObject {
   let name: String
-  @Published var palettes: [Palette] {
-    didSet {
-      if palettes.isEmpty, !oldValue.isEmpty {
-        palettes = oldValue
+  
+  var palettes: [Palette] {
+    get {
+      // Error: Value of type 'UserDefaults' has no member 'palettes'
+      // Sol: Use extension.
+      UserDefaults.standard.palettes(forKey: name)
+    }
+    set {
+      if !newValue.isEmpty {
+        UserDefaults.standard.set(newValue, forKey: name)
+        // This variable tells the view something will change.
+        // So, be prepared, you might have to update.
+        objectWillChange.send()
       }
     }
   }
   
   init(named name: String) {
     self.name = name
-    palettes = Palette.builtins
     if palettes.isEmpty {
-      palettes = [Palette(name: "Warning", emojis: "⚠️")]
+      palettes = Palette.builtins
+      if palettes.isEmpty {
+        palettes = [Palette(name: "Warning", emojis: "⚠️")]
+      }
     }
   }
   
