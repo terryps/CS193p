@@ -35,7 +35,7 @@ class PaletteStore: ObservableObject {
     }
     set {
       if !newValue.isEmpty {
-        UserDefaults.standard.set(newValue, forKey: name)
+        UserDefaults.standard.set(newValue, forKey: userDefaultsKey)
         // This variable tells the view something will change.
         // So, be prepared, you might have to update.
         objectWillChange.send()
