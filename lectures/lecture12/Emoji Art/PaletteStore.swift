@@ -25,6 +25,8 @@ extension UserDefaults {
 class PaletteStore: ObservableObject {
   let name: String
   
+  private var userDefaultsKey: String { "PaletteStore:" + name }
+  
   var palettes: [Palette] {
     get {
       // Error: Value of type 'UserDefaults' has no member 'palettes'
