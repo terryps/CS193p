@@ -34,57 +34,6 @@ Big Demo
 ```PaletteEditor``` have a whole bunch of stuff for editing the palette.<br/>
 
 
-```TextField``` makes text editable. It has two arguments.
-One is a kind of placeholder or a word that can help the user understand what the field is asking for here.
-And then a second argument called "text", with is the actual text that's being edited inside this text field.
-<br/><br/>
-
-```swift
-  Form {
-    Section(header: Text("Name")) {
-      TextField("Name", text: palette.name)
-    }
-    Section(header: Text("Emojis")) {
-      Text("Add Emojis Here")
-        .font(emojiFont)
-      removeEmojis
-    }
-  }
-  .frame(minWidth: 300, minHeight: 350)
-}
-```
-<br/>
-
-The `TextField` knows that it doesn't want to hold a copy of what's being edited. It wants to edit that thing directly.
-So it request you to give a binding to that source of truth. And the source of truth for `palette.name` is in ViewModel, `PaletteStore`.<br/>
-By making `palette` an `@Binding`, it forces whoever creates the `PaletteEditor` to give us a binding to the source of truth.
-<br/><br/>
-
-```swift
-struct PaletteEditor: View {
-  @Binding var palette: Palette
-  
-  private let emojiFont = Font.system(size: 40)
-  
-  var body: some View {
-    // Form is an extremely powerful VStack-like thing
-    // for when you want to collect information from the user.
-    Form {
-      Section(header: Text("Name")) {
-        TextField("Name", text: $palette.name)
-      }
-      Section(header: Text("Emojis")) {
-        Text("Add Emojis Here")
-          .font(emojiFont)
-        removeEmojis
-      }
-    }
-    .frame(minWidth: 300, minHeight: 350)
-  }
-```
-
-The `$`, projected value of a binding, is another binding to that binding. So `$Palette.name` means a binding to the binding to `Palette` which is going to be bound all the way back to our ViewModel.
-<br/><br/>
 
 Add ```PaletteEditor``` view on ```PaletteChooser``` through ```.sheet``` modifier.
 
@@ -146,3 +95,71 @@ var body: some View {
   }
   .clipped()
 ```
+
+<br/>
+
+### `TextField`
+
+
+```TextField``` makes text editable. It has two arguments.
+One is a kind of placeholder or a word that can help the user understand what the field is asking for here.
+And then a second argument called "text", with is the actual text that's being edited inside this text field.
+<br/><br/>
+
+```swift
+  Form {
+    Section(header: Text("Name")) {
+      TextField("Name", text: palette.name)
+    }
+    Section(header: Text("Emojis")) {
+      Text("Add Emojis Here")
+        .font(emojiFont)
+      removeEmojis
+    }
+  }
+  .frame(minWidth: 300, minHeight: 350)
+}
+```
+<br/>
+
+The `TextField` knows that it doesn't want to hold a copy of what's being edited. It wants to edit that thing directly.
+So it request you to give a binding to that source of truth. And the source of truth for `palette.name` is in ViewModel, `PaletteStore`.<br/>
+By making `palette` an `@Binding`, it forces whoever creates the `PaletteEditor` to give us a binding to the source of truth.
+<br/><br/>
+
+```swift
+struct PaletteEditor: View {
+  @Binding var palette: Palette
+  
+  private let emojiFont = Font.system(size: 40)
+  
+  var body: some View {
+    // Form is an extremely powerful VStack-like thing
+    // for when you want to collect information from the user.
+    Form {
+      Section(header: Text("Name")) {
+        TextField("Name", text: $palette.name)
+      }
+      Section(header: Text("Emojis")) {
+        Text("Add Emojis Here")
+          .font(emojiFont)
+        removeEmojis
+      }
+    }
+    .frame(minWidth: 300, minHeight: 350)
+  }
+```
+
+The `$`, projected value of a binding, is another binding to that binding. So `$Palette.name` means a binding to the binding to `Palette` which is going to be bound all the way back to our ViewModel.
+<br/>
+
+Modify `.sheet` view to refer the true `store`.
+
+```swift
+  .sheet(isPresented: $showPaletteEditor) {
+    PaletteEditor(palette: $store.palettes[store.cursorIndex])
+      .font(nil)
+  }
+```
+
+<br/>
