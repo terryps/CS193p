@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaletteEditor: View {
-  let palette: Palette
+  @Binding var palette: Palette
   
   private let emojiFont = Font.system(size: 40)
   
@@ -17,7 +17,7 @@ struct PaletteEditor: View {
     // for when you want to collect information from the user.
     Form {
       Section(header: Text("Name")) {
-        Text(palette.name)
+        TextField("Name", text: $palette.name)
       }
       Section(header: Text("Emojis")) {
         Text("Add Emojis Here")

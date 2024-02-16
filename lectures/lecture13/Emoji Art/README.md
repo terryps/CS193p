@@ -111,7 +111,7 @@ If you have something that's very context-specific, like, it wants to point at t
 ```TextField``` makes text editable. It has two arguments.
 One is a kind of placeholder or a word that can help the user understand what the field is asking for here.
 And then a second argument called "text", with is the actual text that's being edited inside this text field.
-<br/><br/>
+<br/>
 
 ```swift
   Form {
