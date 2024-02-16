@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Emoji Art
 //
-//  Created by Yeojin Jung on 2024/02/15.
+//  Created by Yeojin Jung on 2023/02/12.
 //
 
 import SwiftUI
@@ -12,13 +12,15 @@ struct ContentView: View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
-                .foregroundStyle(.tint)
+                .foregroundColor(.accentColor)
             Text("Hello, world!")
         }
         .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
