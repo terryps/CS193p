@@ -54,6 +54,7 @@ And then a second argument called "text", with is the actual text that's being e
 }
 ```
 <br/>
+
 The `TextField` knows that it doesn't want to hold a copy of what's being edited. It wants to edit that thing directly.
 So it request you to give a binding to that source of truth. And the source of truth for `palette.name` is in ViewModel, `PaletteStore`.<br/>
 By making `palette` an `@Binding`, it forces whoever creates the `PaletteEditor` to give us a binding to the source of truth.
