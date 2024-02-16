@@ -37,7 +37,9 @@ Big Demo
 
 Add ```PaletteEditor``` view on ```PaletteChooser``` through ```.sheet``` modifier.
 
-### ```.sheet```
+<br/>
+
+### `.sheet`
 
 ```sheet(isPresented:)``` presents a sheet when a binding to a Boolean value that you provide is true.
 
@@ -77,6 +79,8 @@ struct PaletteChooser: View {
 
 There's another way to put something up on screen, which is a "```popover```".
 
+<br/>
+
 ### ```popover(isPresented:)```
 This modifier presents a popover when a given condition is true.
 Kind of like a sheet, but it's not huge. It points to whatever it's modifying or whatever the context is.
@@ -84,9 +88,10 @@ Kind of like a sheet, but it's not huge. It points to whatever it's modifying or
 If you have something that's very context-specific, like, it wants to point at the button that brought it up or some piece of text, you can use a ```popover```.
 
 <br/>
+
 ```swift
-var body: some View {
-  HStack {
+  var body: some View {
+    HStack {
     chooser
       .popover(isPresented: $showPaletteEditor) {
         PaletteEditor()
@@ -95,6 +100,8 @@ var body: some View {
   }
   .clipped()
 ```
+
+<br/>
 
 <br/>
 
