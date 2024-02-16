@@ -20,17 +20,32 @@ struct PaletteChooser: View {
       // unless clipped().
     }
   
-  var chooser: some View {
+  private var chooser: some View {
     AnimatedActionButton(systemImage: "paintpalette") {
       store.cursorIndex += 1
     }
     .contextMenu {
+      gotoMenu
       AnimatedActionButton("New", systemImage: "plus") {
         store.insert(name: "Math", emojis: "+-x%=")
       }
       AnimatedActionButton("Delete", systemImage: "minus") {
         store.palettes.remove(at: store.cursorIndex)
       }
+    }
+  }
+  
+  private var gotoMenu: some View {
+    Menu {
+      ForEach(store.palettes) { palette in
+        AnimatedActionButton(palette.name) {
+          if let index = store.palettes.firstIndex(where: { $0.id == palette.id }) {
+            store.cursorIndex = index
+          }
+        }
+      }
+    } label: {
+      Label("Go To", systemImage: "text.inset")
     }
   }
   
