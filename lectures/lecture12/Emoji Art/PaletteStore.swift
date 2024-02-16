@@ -31,7 +31,7 @@ class PaletteStore: ObservableObject {
     get {
       // Error: Value of type 'UserDefaults' has no member 'palettes'
       // Sol: Use extension.
-      UserDefaults.standard.palettes(forKey: name)
+      UserDefaults.standard.palettes(forKey: userDefaultsKey)
     }
     set {
       if !newValue.isEmpty {
