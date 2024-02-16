@@ -25,6 +25,9 @@ struct PaletteChooser: View {
     .sheet(isPresented: $showPaletteEditor) {
       // It's a ViewBuilder.
       PaletteEditor(palette: store.palettes[store.cursorIndex])
+        // Prob: PaletteEditor's fontsize is too big.
+        // Sol: Stop using whatever setting on me. Go back to the default size.
+        .font(nil)
     }
   }
   

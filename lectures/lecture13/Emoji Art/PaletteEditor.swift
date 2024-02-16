@@ -10,6 +10,8 @@ import SwiftUI
 struct PaletteEditor: View {
   let palette: Palette
   
+  private let emojiFont = Font.system(size: 40)
+  
   var body: some View {
     // Form is an extremely powerful VStack-like thing
     // for when you want to collect information from the user.
@@ -19,6 +21,7 @@ struct PaletteEditor: View {
       }
       Section(header: Text("Emojis")) {
         Text("Add Emojis Here")
+          .font(emojiFont)
         removeEmojis
       }
     }
@@ -34,6 +37,7 @@ struct PaletteEditor: View {
         }
       }
     }
+    .font(emojiFont)
   }
 }
 
