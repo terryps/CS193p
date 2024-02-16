@@ -12,6 +12,8 @@ struct PaletteEditor: View {
   
   private let emojiFont = Font.system(size: 40)
   
+  @State private var emojisToAdd: String = ""
+  
   var body: some View {
     // Form is an extremely powerful VStack-like thing
     // for when you want to collect information from the user.
@@ -20,8 +22,14 @@ struct PaletteEditor: View {
         TextField("Name", text: $palette.name)
       }
       Section(header: Text("Emojis")) {
-        Text("Add Emojis Here")
+        TextField("Add Emojis Here", text: $emojisToAdd)
           .font(emojiFont)
+          .onChange(of: emojisToAdd) {
+            // This palette is in ViewModel. In other words, I'm changing the ViewModel right here.
+            palette.emojis = (emojisToAdd + palette.emojis)
+              .filter { $0.isEmoji }
+              .uniqued
+          }
         removeEmojis
       }
     }
