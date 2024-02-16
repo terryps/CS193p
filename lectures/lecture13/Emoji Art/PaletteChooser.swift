@@ -10,15 +10,23 @@ import SwiftUI
 struct PaletteChooser: View {
   @EnvironmentObject var store: PaletteStore
   
-    var body: some View {
-      HStack {
-        chooser
-        view(for: store.palettes[store.cursorIndex])
-      }
-      .clipped()
-      // Views will draw outside their bounds all the time, like our background does
-      // unless clipped().
+  @State private var showPaletteEditor = false
+  
+  var body: some View {
+    HStack {
+      chooser
+      view(for: store.palettes[store.cursorIndex])
     }
+    // Views will draw outside their bounds all the time, like our background does
+    // unless clipped().
+    .clipped()
+    // isPresented: Boolean whether this sheet should be shown on the screen.
+    // You can set isPresented by binding to showPaletteEditor.
+    .sheet(isPresented: $showPaletteEditor) {
+      // It's a ViewBuilder.
+      PaletteEditor(palette: store.palettes[store.cursorIndex])
+    }
+  }
   
   private var chooser: some View {
     AnimatedActionButton(systemImage: "paintpalette") {
@@ -31,6 +39,9 @@ struct PaletteChooser: View {
       }
       AnimatedActionButton("Delete", systemImage: "minus") {
         store.palettes.remove(at: store.cursorIndex)
+      }
+      AnimatedActionButton("Edit", systemImage: "pencil") {
+        showPaletteEditor = true
       }
     }
   }
