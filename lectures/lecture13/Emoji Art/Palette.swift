@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Palette: Identifiable, Codable {
+struct Palette: Identifiable, Codable, Hashable {
   var name: String
   var emojis: String
   // UUID is a struct that generates an unique id.
