@@ -11,6 +11,7 @@ struct PaletteChooser: View {
   @EnvironmentObject var store: PaletteStore
   
   @State private var showPaletteEditor = false
+  @State private var showPaletteList = false
   
   var body: some View {
     HStack {
@@ -29,6 +30,10 @@ struct PaletteChooser: View {
         // Sol: Stop using whatever setting on me. Go back to the default size.
         .font(nil)
     }
+    .sheet(isPresented: $showPaletteList) {
+      PaletteList()
+        .font(nil)
+    }
   }
   
   private var chooser: some View {
@@ -43,6 +48,9 @@ struct PaletteChooser: View {
       }
       AnimatedActionButton("Edit", systemImage: "pencil") {
         showPaletteEditor = true
+      }
+      AnimatedActionButton("List", systemImage: "list.bullet.rectangle.portrait") {
+        showPaletteList = true
       }
       AnimatedActionButton("Delete", systemImage: "minus.circle", role: .destructive) {
         store.palettes.remove(at: store.cursorIndex)
