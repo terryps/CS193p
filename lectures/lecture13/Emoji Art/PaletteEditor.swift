@@ -77,6 +77,16 @@ struct PaletteEditor: View {
   }
 }
 
-//#Preview {
-//    PaletteEditor()
-//}
+struct PaletteEditor_Previews: PreviewProvider {
+  struct Preview: View {
+    // I wanted to preview this PaletteEditor, so I need something to edit.
+    // So I created a View that has @State, and then I passed a binding to that @State.
+    @State private var palette = PaletteStore(named: "Preview").palettes.first!
+    var body: some View {
+      PaletteEditor(palette: $palette)
+    }
+  }
+  static var previews: some View {
+    Preview()
+  }
+}
