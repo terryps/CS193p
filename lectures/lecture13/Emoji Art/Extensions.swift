@@ -41,6 +41,10 @@ extension String {
             }
         }
     }
+  
+  mutating func remove(_ ch: Character?) {
+    removeAll(where: { $0 == ch })
+  }
 }
 
 extension AnyTransition {
