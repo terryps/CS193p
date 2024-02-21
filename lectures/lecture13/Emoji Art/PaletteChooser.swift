@@ -38,7 +38,8 @@ struct PaletteChooser: View {
     .contextMenu {
       gotoMenu
       AnimatedActionButton("New", systemImage: "plus") {
-        store.insert(name: "Math", emojis: "+-x%=")
+        store.insert(name: "", emojis: "")
+        showPaletteEditor = true
       }
       AnimatedActionButton("Edit", systemImage: "pencil") {
         showPaletteEditor = true
