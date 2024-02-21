@@ -170,3 +170,30 @@ Modify `.sheet` view to refer the true `store`.
 ```
 
 <br/>
+<br/>
+
+### `FocusState`
+
+`FocusState` keeps track of which of the `TextField`s has the focus of the keyboard.<br/>
+Oftentimes, this is a bool because you'll only have one `TextField` and it's either focus or not.<br/>
+Since we have two TextFields, make focused be little `Enum`.<br/>
+It has to be optional because neither of them might be focused.<br/>
+
+```swift
+ // PaletteEditor.swift
+ 
+ enum Focused {
+   case name
+   case addEmojis
+ }
+ 
+ @FocusState private var focused: Focused?
+
+ Section(header: Text("Name")) {
+   TextField("Name", text: $palette.name)
+     .focused($focused, equals: .name)
+ }
+```
+
+<br/>
+Using this `.focused` modifier, it tells the system which thing to set to what when TextField becomes focused and vice versa.
