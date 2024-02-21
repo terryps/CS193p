@@ -20,6 +20,7 @@
 		91B6A7F12B7EFEF200D50509 /* EmojiArtDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B6A7E92B7EFEF200D50509 /* EmojiArtDocumentView.swift */; };
 		91B6A7F22B7EFEF200D50509 /* EmojiArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B6A7EA2B7EFEF200D50509 /* EmojiArtDocument.swift */; };
 		91B6A7F52B7F277000D50509 /* PaletteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B6A7F42B7F277000D50509 /* PaletteEditor.swift */; };
+		91B6A7F72B7F4FDD00D50509 /* PaletteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B6A7F62B7F4FDD00D50509 /* PaletteList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		91B6A7EA2B7EFEF200D50509 /* EmojiArtDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocument.swift; sourceTree = "<group>"; };
 		91B6A7F32B7EFF4400D50509 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		91B6A7F42B7F277000D50509 /* PaletteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEditor.swift; sourceTree = "<group>"; };
+		91B6A7F62B7F4FDD00D50509 /* PaletteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				91B6A7D92B7E06F500D50509 /* Assets.xcassets */,
 				91B6A7DB2B7E06F500D50509 /* Preview Content */,
 				91B6A7F32B7EFF4400D50509 /* README.md */,
+				91B6A7F62B7F4FDD00D50509 /* PaletteList.swift */,
 			);
 			path = "Emoji Art";
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				91B6A7EB2B7EFEF200D50509 /* PaletteChooser.swift in Sources */,
 				91B6A7EC2B7EFEF200D50509 /* Extensions.swift in Sources */,
 				91B6A7ED2B7EFEF200D50509 /* Sturldata.swift in Sources */,
+				91B6A7F72B7F4FDD00D50509 /* PaletteList.swift in Sources */,
 				91B6A7EE2B7EFEF200D50509 /* Palette.swift in Sources */,
 				91B6A7EF2B7EFEF200D50509 /* PaletteStore.swift in Sources */,
 				91B6A7F02B7EFEF200D50509 /* EmojiArt.swift in Sources */,
