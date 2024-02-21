@@ -40,11 +40,11 @@ struct PaletteChooser: View {
       AnimatedActionButton("New", systemImage: "plus") {
         store.insert(name: "Math", emojis: "+-x%=")
       }
-      AnimatedActionButton("Delete", systemImage: "minus") {
-        store.palettes.remove(at: store.cursorIndex)
-      }
       AnimatedActionButton("Edit", systemImage: "pencil") {
         showPaletteEditor = true
+      }
+      AnimatedActionButton("Delete", systemImage: "minus.circle", role: .destructive) {
+        store.palettes.remove(at: store.cursorIndex)
       }
     }
   }
