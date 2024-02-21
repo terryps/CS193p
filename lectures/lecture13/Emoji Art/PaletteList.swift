@@ -7,6 +7,55 @@
 
 import SwiftUI
 
+struct EditablePaletteList: View {
+  @EnvironmentObject var store: PaletteStore
+  
+  @State private var showCursorPalette = false
+  
+  var body: some View {
+    NavigationStack {
+      List {
+        ForEach(store.palettes) { palette in
+          NavigationLink(value: palette) {
+            VStack(alignment: .leading) {
+              Text(palette.name)
+              Text(palette.emojis).lineLimit(1)
+            }
+          }
+        }
+        .onDelete { indexSet in
+          // indexSet: a set of indices into the ForEach's array
+          withAnimation {
+            // takes an indexSet and removes all the things at those indices in one batch
+            store.palettes.remove(atOffsets: indexSet)
+          }
+        }
+        .onMove { indexSet, newOffset in
+          store.palettes.move(fromOffsets: indexSet, toOffset: newOffset)
+        }
+      }
+      .navigationDestination(for: Palette.self) { palette in
+        if let index = store.palettes.firstIndex(where: { $0.id == palette.id}) {
+          PaletteEditor(palette: $store.palettes[index])
+        }
+      }
+      .navigationDestination(isPresented: $showCursorPalette) {
+        PaletteEditor(palette: $store.palettes[store.cursorIndex])
+      }
+      .navigationTitle("\(store.name) Palettes")
+      .toolbar {
+        Button {
+          store.insert(name: "", emojis: "")
+          showCursorPalette = true
+        } label: {
+          Image(systemName: "plus")
+        }
+      }
+    }
+  }
+}
+
+
 struct PaletteList: View {
   // store that's been injected down into all of these @EnvironmentObject store.
   @EnvironmentObject var store: PaletteStore
